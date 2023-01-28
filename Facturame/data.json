@@ -1,0 +1,16 @@
+{
+  "Name": "John",
+  "Company": "Google",
+  "Date":  "11/01/2023",
+  "InvoiceNumber": "001",
+  "subItems": [
+    {
+      "Description": "Sample Expense01",
+      "Amount": 500
+    },
+    {
+      "Description": "Sample Expense02",
+      "Amount": 500
+    }
+  ]
+}

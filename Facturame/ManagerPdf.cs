@@ -16,6 +16,7 @@ using static PdfSharpCore.Pdf.AcroForms.PdfAcroField;
 using PdfSharpCore.Fonts;
 using PdfSharpCore.Utils;
 using System.Runtime.InteropServices;
+using InvoiceMe;
 
 namespace Facturame
 {
@@ -24,7 +25,7 @@ namespace Facturame
         private readonly PdfDocument document;
         private readonly PdfPage page;
         private readonly XGraphics gfx;
-        public int finalAmount;
+        public decimal finalAmount;
         public ManagerPdf(PdfPage page, XGraphics gfx, PdfDocument document)
         {
             this.page = page;
@@ -49,13 +50,14 @@ namespace Facturame
         }
 
 
-        public int CreateColumnOfAmount(List<string> data, int x, int y)
+        public int CreateColumnOfAmount(List<SubItem> subItems, int x, int y)
         {
-            foreach (string input in data)
+            foreach(var subItem in subItems)
             {
-                WriteText("$"+input, 12, x, y, new XSolidBrush(XColors.DarkBlue));
+                WriteText(subItem.Description, 12, x - 490, y, new XSolidBrush(XColors.Black));
+                WriteText("$"+ subItem.Amount, 12, x, y, new XSolidBrush(XColors.Black));
                 y += 20;
-                finalAmount += int.Parse(input);
+                finalAmount += subItem.Amount;
             }
             return y;
         }
@@ -104,7 +106,7 @@ namespace Facturame
             WriteText("FECHA", 12, 370, 220, new XSolidBrush(XColors.Black));
             WriteText("25/01/2023", 9, 500, 220, new XSolidBrush(XColors.Black));
         }
-        public void CreatePDF(string name, string company, List<string> amounts, string invoiceNumber, string path)
+        public void CreatePDF(string name, string company, List<SubItem> amounts, string invoiceNumber, string path)
         {
             GlobalFontSettings.FontResolver = new FontResolver();
             var document = new PdfDocument();
