@@ -23,7 +23,7 @@ namespace InvoiceMe
         }
 
 
-        public int Number { get; set; }
+        public int InvoiceNumber { get; set; }
 
         public string Date { get; set; }
 

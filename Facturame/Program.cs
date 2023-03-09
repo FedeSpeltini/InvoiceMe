@@ -39,7 +39,7 @@ manager.WriteText(invoice.Name, 12, 10, 80, new XSolidBrush(XColors.Black));
 manager.CreateColumnOfData(new string[] { "FACTURAR A", "N° DE FACTURA"}, 10, 200, 360);
 
 
-manager.WriteText(invoice.Number.ToString(), 9, 500, 200, new XSolidBrush(XColors.Black));
+manager.WriteText(invoice.InvoiceNumber.ToString(), 9, 500, 200, new XSolidBrush(XColors.Black));
 
 
 manager.WriteText(invoice.Company, 9, 10, 220, new XSolidBrush(XColors.Black));
@@ -58,6 +58,6 @@ manager.CreateColumnOfData(new string[] { "TOTAL", invoice.FinalAmount }, 370, y
 manager.DigitalSign(invoice.Name, yFinalValue + 30);
 
 
-document.Save(@$"{path}\invoice{invoice.Number}.pdf");
+document.Save(@$"{path}\invoice{invoice.InvoiceNumber}.pdf");
 
 Console.WriteLine("Su fatctura fue creada con éxito!");
